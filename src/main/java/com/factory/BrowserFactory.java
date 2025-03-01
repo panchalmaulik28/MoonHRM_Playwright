@@ -1,8 +1,10 @@
 package com.factory;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException; 
+import java.io.IOException;
 import java.util.Properties;
 
 import com.microsoft.playwright.Browser;
@@ -20,16 +22,17 @@ public class BrowserFactory {
 	public static Properties prop;
 
 	public static void browserInvoke() {
+
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = (int) dimension.getHeight();
+		int width = (int) dimension.getWidth();
+
 		prop = config();
-		String  browserConfig = (String) prop.get("browser");
-		String  URL = (String) prop.get("url");
-		
-		LaunchOptions lp = new LaunchOptions();
-		lp.setChannel(browserConfig);
-		lp.setHeadless(false);
+		String browserName = (String) prop.get("browser");
+		String URL = (String) prop.get("url");
 		playwright = Playwright.create();
-		browser = playwright.chromium().launch(lp);
-		browserContext = browser.newContext();
+		browser = playwright.chromium().launch(new LaunchOptions().setChannel(browserName).setHeadless(false));
+		browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width, height));
 		page = browserContext.newPage();
 		page.navigate(URL);
 	}

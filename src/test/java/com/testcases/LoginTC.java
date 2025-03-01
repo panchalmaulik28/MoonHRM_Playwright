@@ -12,6 +12,14 @@ public class LoginTC extends BaseTest {
 	LoginPage loginPage;
 
 	@Test(priority = 1)
+	public void emailPassMandatory() {
+		loginPage = new LoginPage();
+		loginPage.emailPassMandatory();
+		assertEquals(loginPage.emailValidation.textContent().trim(), AppConstant.EMAIL_VALIDATION);
+		assertEquals(loginPage.passwordValidation.textContent().trim(), AppConstant.PASSWORD_VALIDATION);
+	}
+
+	@Test(priority = 2)
 	public void loginWithWrongCredentials() {
 		loginPage = new LoginPage();
 		loginPage.loginWithValidCredentials("maulik.p+admin@moontechnolabs.com", "Qa@123451");
@@ -19,11 +27,11 @@ public class LoginTC extends BaseTest {
 		loginPage.snackBarInVisible();
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 3)
 	public void loginWithValidCredentials() {
 		loginPage = new LoginPage();
 		loginPage.loginWithValidCredentials("maulik.p+admin@moontechnolabs.com", "Qa@12345");
 		assertEquals(loginPage.snackBarVisible(), AppConstant.LOGIN_SUCCESSFUL);
 		loginPage.snackBarInVisible();
-	}  
+	}
 }
