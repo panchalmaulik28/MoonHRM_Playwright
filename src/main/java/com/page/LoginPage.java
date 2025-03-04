@@ -21,7 +21,7 @@ public class LoginPage extends BrowserFactory {
 	}
 
 	public void loginWithValidCredentials(String email, String password) {
-		fillEmail(email);
+		fillEmail(email); 
 		fillPassword(password);
 		submitBtn.click();
 	}

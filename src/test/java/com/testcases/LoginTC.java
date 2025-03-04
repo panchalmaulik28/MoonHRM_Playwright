@@ -6,11 +6,14 @@ import org.testng.annotations.Test;
 
 import com.base.BaseTest;
 import com.constant.AppConstant;
+import com.factory.BrowserFactory;
 import com.page.LoginPage;
 
 public class LoginTC extends BaseTest {
-	LoginPage loginPage;
-
+	static LoginPage loginPage;
+	static String email =(String) BrowserFactory.prop.get("emailAdmin");
+	static String password = (String) BrowserFactory.prop.get("password");
+	
 	@Test(priority = 1)
 	public void emailPassMandatory() {
 		loginPage = new LoginPage();
@@ -22,15 +25,15 @@ public class LoginTC extends BaseTest {
 	@Test(priority = 2)
 	public void loginWithWrongCredentials() {
 		loginPage = new LoginPage();
-		loginPage.loginWithValidCredentials("maulik.p+admin@moontechnolabs.com", "Qa@123451");
+		loginPage.loginWithValidCredentials(email, password + "1");
 		assertEquals(loginPage.snackBarVisible(), AppConstant.LOGIN_FAILED);
 		loginPage.snackBarInVisible();
 	}
 
 	@Test(priority = 3)
-	public void loginWithValidCredentials() {
+	public static void loginWithValidCredentials() {
 		loginPage = new LoginPage();
-		loginPage.loginWithValidCredentials("maulik.p+admin@moontechnolabs.com", "Qa@12345");
+		loginPage.loginWithValidCredentials(email, password);
 		assertEquals(loginPage.snackBarVisible(), AppConstant.LOGIN_SUCCESSFUL);
 		loginPage.snackBarInVisible();
 	}
