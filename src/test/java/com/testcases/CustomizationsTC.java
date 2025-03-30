@@ -99,4 +99,68 @@ public class CustomizationsTC extends BaseTest {
 		}
 		SideMenuPage.hiddenToastMessage();
 	}
+
+	@Test(priority = 4)
+	public void addTeams() {
+		designationsTeamsCRUD("Customizations", "Teams", "add");
+	}
+
+	@Test(dependsOnMethods = "addTeams")
+	public void editTeams() {
+		designationsTeamsCRUD("Customizations", "Teams", "edit");
+	}
+
+	@Test(dependsOnMethods = "editTeams")
+	public void deleteTeams() {
+		designationsTeamsCRUD("Customizations", "Teams", "delete");
+	}
+
+	@Test(priority = 5)
+	public void addDesignations() {
+		designationsTeamsCRUD("Customizations", "Designations", "add");
+	}
+
+	@Test(dependsOnMethods = "addDesignations")
+	public void editDesignations() {
+		designationsTeamsCRUD("Customizations", "Designations", "edit");
+	}
+
+	@Test(dependsOnMethods = "editDesignations")
+	public void deleteDesignations() {
+		designationsTeamsCRUD("Customizations", "Designations", "delete");
+	}
+
+	public void designationsTeamsCRUD(String menu, String subMenu, String operation) {
+		customizationsPage = new CustomizationsPage();
+		SideMenuPage.sideMenuClick(menu);
+		SideMenuPage.subMenu(subMenu);
+
+		if (operation.equals("add")) {
+			if (subMenu.equals("Designations")) {
+				customizationsPage.addDesignationsTeam("General");
+				assertEquals(SideMenuPage.getToastMessage(), AppConstant.DESIGNATION_ADD);
+			} else if (subMenu.equals("Teams")) {
+				customizationsPage.addDesignationsTeam("CEO CEO");
+				assertEquals(SideMenuPage.getToastMessage(), AppConstant.TEAM_ADD);
+			}
+		} else if (operation.equals("edit")) {
+			if (subMenu.equals("Designations")) {
+				customizationsPage.editDesignationsTeam("HR");
+				assertEquals(SideMenuPage.getToastMessage(), AppConstant.DESIGNATION_UPDATE);
+			} else if (subMenu.equals("Teams")) {
+				customizationsPage.editDesignationsTeam("CEO CEO");
+				assertEquals(SideMenuPage.getToastMessage(), AppConstant.TEAM_UPDATE);
+			}
+		} else if (operation.equals("delete")) {
+			if (subMenu.equals("Designations")) {
+				customizationsPage.deleteDesignationsTeam();
+				assertEquals(SideMenuPage.getToastMessage(), AppConstant.DESIGNATION_DELETE);
+			} else if (subMenu.equals("Teams")) {
+				customizationsPage.deleteDesignationsTeam();
+				assertEquals(SideMenuPage.getToastMessage(), AppConstant.TEAM_DELETE);
+			}
+		}
+		SideMenuPage.hiddenToastMessage();
+	}
+
 }
