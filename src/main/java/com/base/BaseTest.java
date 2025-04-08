@@ -2,18 +2,17 @@ package com.base;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-
-import com.factory.BrowserFactory;
+import com.utilities.WebDriverManager;
 
 public class BaseTest {
 
 	@BeforeTest
 	public void invoke() {
-		BrowserFactory.browserInvoke();
+		WebDriverManager.browserInvoke();
 	}
 
 	@AfterTest
 	public void closeBrowser() {
-		BrowserFactory.tearDown();
+		WebDriverManager.tearDown();
 	}
 }

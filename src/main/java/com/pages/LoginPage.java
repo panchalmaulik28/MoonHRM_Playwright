@@ -1,9 +1,9 @@
-package com.page;
+package com.pages;
 
-import com.factory.BrowserFactory;
 import com.microsoft.playwright.Locator;
+import com.utilities.WebDriverManager;
 
-public class LoginPage extends BrowserFactory {
+public class LoginPage extends WebDriverManager {
 
 	public Locator emailValidation = page.locator("//mat-error[@id='mat-mdc-error-0']");
 	public Locator passwordValidation = page.locator("//mat-error[@id='mat-mdc-error-1']");

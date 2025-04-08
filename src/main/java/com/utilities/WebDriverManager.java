@@ -1,19 +1,16 @@
-package com.factory;
+package com.utilities;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Properties;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
+import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
-import com.microsoft.playwright.BrowserType.LaunchOptions;
 
-public class BrowserFactory {
+public class WebDriverManager {
 
 	static Playwright playwright;
 	static Browser browser;
@@ -27,30 +24,40 @@ public class BrowserFactory {
 		int height = (int) dimension.getHeight();
 		int width = (int) dimension.getWidth();
 
-		prop = config();
+		prop = ConfigRead.config();
 		String browserName = (String) prop.get("browser");
 		String URL = (String) prop.get("url");
 		playwright = Playwright.create();
-		browser = playwright.chromium().launch(new LaunchOptions().setChannel(browserName).setHeadless(false));
+
+		switch (browserName.trim()) {
+		case "Chromium":
+			browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+			break;
+		case "firefox":
+			browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(false));
+			break;
+		case "safari":
+			browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(false));
+			break;
+		case "chrome":
+			browser = playwright.chromium()
+					.launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false));
+			break;
+		default:
+			System.out.println("Please correct browser spelling...");
+			break;
+		}
+
 		browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width, height));
 		page = browserContext.newPage();
 		page.navigate(URL);
 	}
 
 	public static void tearDown() {
-		page.close();
+		if (page != null) {
+			page.close();
+			page = null;
+		}
 	}
 
-	public static Properties config() {
-		try {
-			prop = new Properties();
-			FileInputStream file = new FileInputStream("./src/test/resources/config.properites");
-			prop.load(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return prop;
-	}
 }

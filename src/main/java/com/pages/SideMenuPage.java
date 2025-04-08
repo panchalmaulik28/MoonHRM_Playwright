@@ -1,9 +1,9 @@
-package com.page;
+package com.pages;
 
-import com.factory.BrowserFactory;
 import com.microsoft.playwright.Locator;
+import com.utilities.WebDriverManager;
 
-public class SideMenuPage extends BrowserFactory {
+public class SideMenuPage extends WebDriverManager {
 
 	static Locator sideMenuTextList = page.locator("//span[@class='mdc-list-item__content']/span/span");
 	static Locator project = page.locator("//mat-nav-list[contains(@class,'mat-mdc-nav-list')][8]");

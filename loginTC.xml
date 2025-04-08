@@ -3,7 +3,7 @@
 <suite name="Suite">
   <test name="LoginTC">
     <classes>
-      <class name="com.testcases.LoginTC"/>
+      <class name="tests.LoginTest"/>
     </classes>
   </test> 
 </suite> 

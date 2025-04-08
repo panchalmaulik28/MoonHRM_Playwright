@@ -1,10 +1,10 @@
-package com.page;
+package com.pages;
 
-import com.factory.BrowserFactory;
 import com.microsoft.playwright.Locator;
+import com.utilities.WebDriverManager;
 
 
-public class CustomizationsPage extends BrowserFactory {
+public class CustomizationsPage extends WebDriverManager {
  
 	Locator addBtn = page.locator("//button[contains(@class,'menu-button mdc-fab')]");
 	Locator addSkillBtn = page.locator("//button[contains(@class,'two ')][1]");
