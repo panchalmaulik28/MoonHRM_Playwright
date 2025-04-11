@@ -20,9 +20,9 @@ public class WebDriverManager {
 
 	public static void browserInvoke() {
 
-		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		int height = (int) dimension.getHeight();
-		int width = (int) dimension.getWidth();
+//		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+//		int height = (int) dimension.getHeight();
+//		int width = (int) dimension.getWidth();
 
 		prop = ConfigRead.config();
 		String browserName = (String) prop.get("browser");
@@ -48,7 +48,7 @@ public class WebDriverManager {
 			break;
 		}
 
-		browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width, height));
+		browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(1200, 600));
 		page = browserContext.newPage();
 		page.navigate(URL);
 	}
@@ -59,5 +59,4 @@ public class WebDriverManager {
 			page = null;
 		}
 	}
-
 }

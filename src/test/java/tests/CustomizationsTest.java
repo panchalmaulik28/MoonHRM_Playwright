@@ -1,10 +1,8 @@
 package tests;
 
 import static org.testng.Assert.assertEquals;
-
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import com.base.BaseTest;
 import com.constant.AppConstant;
 import com.pages.CustomizationsPage;
@@ -14,7 +12,7 @@ public class CustomizationsTest extends BaseTest {
 
 	CustomizationsPage customizationsPage;
 
-	@BeforeClass
+	@BeforeTest
 	public void login() {
 		LoginTest.loginWithValidCredentials();
 	}
@@ -67,7 +65,9 @@ public class CustomizationsTest extends BaseTest {
 	public void skillDepartmentPlatformsCRUD(String menu, String subMenu, String operation) {
 		customizationsPage = new CustomizationsPage();
 		SideMenuPage.sideMenuClick(menu);
+		SideMenuPage.spinnerDismiss();
 		SideMenuPage.subMenu(subMenu);
+		SideMenuPage.spinnerDismiss();
 
 		if (operation.equals("add")) {
 			customizationsPage.addSkill();
@@ -133,7 +133,9 @@ public class CustomizationsTest extends BaseTest {
 	public void designationsTeamsCRUD(String menu, String subMenu, String operation) {
 		customizationsPage = new CustomizationsPage();
 		SideMenuPage.sideMenuClick(menu);
+		SideMenuPage.spinnerDismiss();
 		SideMenuPage.subMenu(subMenu);
+		SideMenuPage.spinnerDismiss();
 
 		if (operation.equals("add")) {
 			if (subMenu.equals("Designations")) {

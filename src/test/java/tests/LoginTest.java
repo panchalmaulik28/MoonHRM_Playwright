@@ -1,9 +1,7 @@
 package tests;
 
 import static org.testng.Assert.assertEquals;
-
 import org.testng.annotations.Test;
-
 import com.base.BaseTest;
 import com.constant.AppConstant;
 import com.pages.LoginPage;

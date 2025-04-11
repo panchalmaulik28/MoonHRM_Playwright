@@ -11,6 +11,7 @@ public class SideMenuPage extends WebDriverManager {
 	static Locator subMenuList = page.locator("//div[@class='left_wrap']/div[2]/ul/li");
 	static Locator spinner = page.locator("//div[@class='tbl_spinner']");
 	static Locator toastMessage = page.locator("//div[@id='toast-container']/div/div");
+	Locator spinner1 = page.locator("//div[contains(@class,'tbl_spinner')]");
 
 	public static void sideMenuClick(String sideMenuText) {
 		int count = sideMenuTextList.count();
