@@ -20,20 +20,21 @@ public class CustomizationsPage extends WebDriverManager {
 	Locator listBox = page.locator("//div[@role='listbox']");
 	Locator rolelistTxt = page.locator("//div[@role='listbox']/mat-option/span");
 	Locator popup = page.locator("//mat-dialog-container[@role='dialog']");
-	
-	
+
 	String text = "Playwright Automation";
 
-	public void addSkill() {
-		SideMenuPage.spinnerDismiss();
+	public void addSkillDepartmentPlatformDesignationsTeam(String value) {
 		addBtn.click();
 		addSkillBtn.click();
 		nameTxt.fill(text);
+		if (!value.isEmpty()) {
+			roleSelect(value);
+		}
 		saveBtn.click();
+		SideMenuPage.spinnerDismiss();
 	}
 
-	public void editSkill() {
-		SideMenuPage.spinnerDismiss();
+	public void editSkillDepartmentPlatform() {
 		int count = nameList.count();
 		if (count != 0) {
 			for (int i = 1; i < count - 1; i++) {
@@ -46,53 +47,18 @@ public class CustomizationsPage extends WebDriverManager {
 					nameTxt.clear();
 					nameTxt.fill(text + " Update");
 					updateBtn.click();
+					SideMenuPage.spinnerDismiss();
 					break;
 				}
 			}
 		} else {
-			editSkill();
+			editSkillDepartmentPlatform();
 		}
 	}
 
-	public void deleteSkill() {
-		SideMenuPage.spinnerDismiss();
+	public void editDesignationsTeam(String role) {
 		int count = nameList.count();
-		if (count != 0) {
-			for (int i = 1; i < count - 1; i++) {
-				if (nameList.nth(i).textContent().trim().equals(text.trim() + " Update")) {
-					actionBtn.nth(i).scrollIntoViewIfNeeded();
-					actionBtn.nth(i).click();
-					deleteBtn.click();
-					yesBtn.click();
-				}
-			}
-		} else {
-			deleteSkill();
-		}
-
-	}
-
-	public void addDesignationsTeam(String role) {
-		SideMenuPage.spinnerDismiss();
-		addBtn.click();
-		addSkillBtn.click();
-		nameTxt.fill(text);
-		roleDD.click();
-		int count = rolelistTxt.count();
-		for (int i = 1; i < count - 1; i++) {
-			if (rolelistTxt.nth(i).textContent().trim().equals(role)) {
-				rolelistTxt.nth(i).scrollIntoViewIfNeeded();
-				rolelistTxt.nth(i).click();
-				break;
-			}
-		}
-		saveBtn.click();
-	}
-
-	public void editDesignationsTeam(String role) {	
-		SideMenuPage.spinnerDismiss();
-		int count = nameList.count();
-		for (int i = 1; i < count - 1; i++) {
+		for (int i = 0; i < count - 1; i++) {
 			if (nameList.nth(i).textContent().trim().equals(text.trim())) {
 				actionBtn1.nth(i).scrollIntoViewIfNeeded();
 				actionBtn1.nth(i).click();
@@ -101,31 +67,55 @@ public class CustomizationsPage extends WebDriverManager {
 				break;
 			}
 		}
-		SideMenuPage.spinnerDismiss();
-		nameTxt.clear();
 		nameTxt.fill(text + " Update");
-		roleDD.click();
-		int count1 = rolelistTxt.count();
-		for (int i = 1; i < count1 - 1; i++) {
-			if (rolelistTxt.nth(i).textContent().trim().equals(role.trim())) {
-				rolelistTxt.nth(i).scrollIntoViewIfNeeded();
-				rolelistTxt.nth(i).click();
-				break;
-			}
-		}
+		roleSelect(role);
 		updateBtn.click();
+		SideMenuPage.spinnerDismiss();
+	}
+
+	public void roleSelect(String role) {
+		if(!rolelistTxt.isVisible()) {
+			roleDD.click();			
+		}
+		int count = rolelistTxt.count();
+		if (count != 0) {
+			for (int i = 1; i < count - 1; i++) {
+				if (rolelistTxt.nth(i).textContent().trim().equals(role)) {
+					rolelistTxt.nth(i).scrollIntoViewIfNeeded();
+					rolelistTxt.nth(i).click();
+					break;
+				}
+			}
+		} else {
+			roleSelect(role);
+		}
+	}
+
+	public void deleteSkillDepartmentPlatform() {
+		delete(actionBtn);
 	}
 
 	public void deleteDesignationsTeam() {
+		delete(actionBtn1);
+	}
+
+	public void delete(Locator locator) {
 		int count = nameList.count();
-		for (int i = 1; i < count - 1; i++) {
-			if (nameList.nth(i).textContent().trim().equals(text.trim() + " Update")) {
-				actionBtn1.nth(i).scrollIntoViewIfNeeded();
-				actionBtn1.nth(i).click();
-				deleteBtn.click();
-				yesBtn.click();
-				break;
+		System.out.println("Count = "+count);
+		if (count != 0) {
+			for (int i = 0; i < count - 1; i++) {
+				System.out.println(nameList.nth(i).textContent() + " : " + text.trim() + " Update");
+				if (nameList.nth(i).textContent().trim().equals(text.trim() + " Update")) {
+					System.out.println("Inside If = " + nameList.nth(i).textContent() + " : " + text.trim() + " Update");
+					locator.nth(i).scrollIntoViewIfNeeded();
+					locator.nth(i).click();
+					deleteBtn.click();
+					yesBtn.click();
+					SideMenuPage.spinnerDismiss();
+				}
 			}
+		} else {
+			delete(locator);
 		}
 	}
 }
