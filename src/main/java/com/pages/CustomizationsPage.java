@@ -74,8 +74,8 @@ public class CustomizationsPage extends WebDriverManager {
 	}
 
 	public void roleSelect(String role) {
-		if(!rolelistTxt.isVisible()) {
-			roleDD.click();			
+		if (!rolelistTxt.isVisible()) {
+			roleDD.click();
 		}
 		int count = rolelistTxt.count();
 		if (count != 0) {
@@ -101,12 +101,9 @@ public class CustomizationsPage extends WebDriverManager {
 
 	public void delete(Locator locator) {
 		int count = nameList.count();
-		System.out.println("Count = "+count);
 		if (count != 0) {
 			for (int i = 0; i < count - 1; i++) {
-				System.out.println(nameList.nth(i).textContent() + " : " + text.trim() + " Update");
 				if (nameList.nth(i).textContent().trim().equals(text.trim() + " Update")) {
-					System.out.println("Inside If = " + nameList.nth(i).textContent() + " : " + text.trim() + " Update");
 					locator.nth(i).scrollIntoViewIfNeeded();
 					locator.nth(i).click();
 					deleteBtn.click();

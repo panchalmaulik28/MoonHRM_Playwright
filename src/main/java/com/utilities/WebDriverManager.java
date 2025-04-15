@@ -2,6 +2,7 @@ package com.utilities;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 import com.microsoft.playwright.Browser;
@@ -20,9 +21,9 @@ public class WebDriverManager {
 
 	public static void browserInvoke() {
 
-//		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-//		int height = (int) dimension.getHeight();
-//		int width = (int) dimension.getWidth();
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = (int) dimension.getHeight() - 140;
+		int width = (int) dimension.getWidth() - 60;
 
 		prop = ConfigRead.config();
 		String browserName = (String) prop.get("browser");
@@ -48,7 +49,7 @@ public class WebDriverManager {
 			break;
 		}
 
-		browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(1200, 600));
+		browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width,height)); // .setRecordVideoDir(Paths.get("test-results/video"))
 		page = browserContext.newPage();
 		page.navigate(URL);
 	}
