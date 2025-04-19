@@ -74,13 +74,13 @@ public class CustomizationsPage extends WebDriverManager {
 	}
 
 	public void roleSelect(String role) {
-		if (!rolelistTxt.isVisible()) {
+		if (rolelistTxt.isHidden()) {
 			roleDD.click();
 		}
 		int count = rolelistTxt.count();
-		if (count != 0) {
-			for (int i = 1; i < count - 1; i++) {
-				if (rolelistTxt.nth(i).textContent().trim().equals(role)) {
+		if (count > 1) {
+			for (int i = 0; i < count - 1; i++) {
+				if (rolelistTxt.nth(i).textContent().trim().equals(role.trim())) {
 					rolelistTxt.nth(i).scrollIntoViewIfNeeded();
 					rolelistTxt.nth(i).click();
 					break;

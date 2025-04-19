@@ -68,9 +68,9 @@ public class CustomizationsTest extends BaseTest {
 		SideMenuPage.subMenu(subMenu);
 
 		if (operation.equals("add")) {
-			
+
 			customizationsPage.addSkillDepartmentPlatformDesignationsTeam("");
-			
+
 			if (subMenu.equals("Skills")) {
 				assertEquals(SideMenuPage.getToastMessage(), AppConstant.SKILL_ADD);
 			} else if (subMenu.equals("Departments")) {
@@ -79,9 +79,9 @@ public class CustomizationsTest extends BaseTest {
 				assertEquals(SideMenuPage.getToastMessage(), AppConstant.PLATFORM_ADD);
 			}
 		} else if (operation.equals("edit")) {
-			
+
 			customizationsPage.editSkillDepartmentPlatform();
-			
+
 			if (subMenu.equals("Skills")) {
 				assertEquals(SideMenuPage.getToastMessage().trim(), AppConstant.SKILL_UPDATE);
 			} else if (subMenu.equals("Departments")) {
@@ -90,9 +90,9 @@ public class CustomizationsTest extends BaseTest {
 				assertEquals(SideMenuPage.getToastMessage(), AppConstant.PLATFORM_UPDATE);
 			}
 		} else if (operation.equals("delete")) {
-			
+
 			customizationsPage.deleteSkillDepartmentPlatform();
-			
+
 			if (subMenu.equals("Skills")) {
 				assertEquals(SideMenuPage.getToastMessage().trim(), AppConstant.SKILL_DELETE);
 			} else if (subMenu.equals("Departments")) {
@@ -140,7 +140,7 @@ public class CustomizationsTest extends BaseTest {
 		SideMenuPage.subMenu(subMenu);
 
 		if (operation.equals("add")) {
-			
+
 			if (subMenu.equals("Designations")) {
 				customizationsPage.addSkillDepartmentPlatformDesignationsTeam("General");
 				assertEquals(SideMenuPage.getToastMessage(), AppConstant.DESIGNATION_ADD);

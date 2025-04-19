@@ -7,7 +7,7 @@ public class SideMenuPage extends WebDriverManager {
 
 	static Locator sideMenuTextList = page.locator("//span[@class='mdc-list-item__content']/span/span");
 	static Locator project = page.locator("//mat-nav-list[contains(@class,'mat-mdc-nav-list')][8]");
-	static Locator admin = page.locator("//mat-nav-list[contains(@class,'mat-mdc-nav-list')][14]");
+	static Locator admin = page.locator("//mat-nav-list[contains(@class,'mat-mdc-nav-list')][15]");
 	static Locator subMenuList = page.locator("//div[@class='left_wrap']/div[2]/ul/li");
 	static Locator spinner = page.locator("//div[contains(@class,'tbl_spinner')]");
 	static Locator toastMessage = page.locator("//div[@id='toast-container']/div/div");

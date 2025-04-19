@@ -11,7 +11,7 @@ public class LoginTest extends BaseTest {
 	static LoginPage loginPage;
 	static String email;
 	static String password;
-
+	
 	@Test(priority = 1)
 	public void emailPassMandatory() {
 		loginPage = new LoginPage();

@@ -37,7 +37,7 @@ public class LoginPage extends WebDriverManager {
 	}
 
 	public void snackBarInVisible() {
-		if (snackBar.isHidden() == false) {
+		if (snackBar.isVisible()) {
 			snackBarInVisible();
 		}
 	}
