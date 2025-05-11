@@ -31,7 +31,7 @@ public class CustomizationsPage extends WebDriverManager {
 			roleSelect(value);
 		}
 		saveBtn.click();
-		SideMenuPage.spinnerDismiss();
+		BasePage.spinnerDismiss();
 	}
 
 	public void editSkillDepartmentPlatform() {
@@ -42,12 +42,12 @@ public class CustomizationsPage extends WebDriverManager {
 					actionBtn.nth(i).scrollIntoViewIfNeeded();
 					actionBtn.nth(i).click();
 					editBtn.click();
-					SideMenuPage.spinnerDismiss();
+					BasePage.spinnerDismiss();
 					nameTxt.focus();
 					nameTxt.clear();
 					nameTxt.fill(text + " Update");
 					updateBtn.click();
-					SideMenuPage.spinnerDismiss();
+					BasePage.spinnerDismiss();
 					break;
 				}
 			}
@@ -63,14 +63,14 @@ public class CustomizationsPage extends WebDriverManager {
 				actionBtn1.nth(i).scrollIntoViewIfNeeded();
 				actionBtn1.nth(i).click();
 				editBtn.click();
-				SideMenuPage.spinnerDismiss();
+				BasePage.spinnerDismiss();
 				break;
 			}
 		}
 		nameTxt.fill(text + " Update");
 		roleSelect(role);
 		updateBtn.click();
-		SideMenuPage.spinnerDismiss();
+		BasePage.spinnerDismiss();
 	}
 
 	public void roleSelect(String role) {
@@ -108,7 +108,7 @@ public class CustomizationsPage extends WebDriverManager {
 					locator.nth(i).click();
 					deleteBtn.click();
 					yesBtn.click();
-					SideMenuPage.spinnerDismiss();
+					BasePage.spinnerDismiss();
 				}
 			}
 		} else {

@@ -1,10 +1,13 @@
 package tests;
 
 import static org.testng.Assert.assertEquals;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import com.base.BaseTest;
 import com.constant.AppConstant;
+import com.pages.BasePage;
 import com.pages.CustomizationsPage;
 import com.pages.SideMenuPage;
 
@@ -12,12 +15,17 @@ public class CustomizationsTest extends BaseTest {
 
 	CustomizationsPage customizationsPage;
 
+	@BeforeClass
+	public void object() {
+		customizationsPage = new CustomizationsPage();
+	}
+
 	@BeforeTest
 	public void login() {
 		LoginTest.loginWithValidCredentials();
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 0)
 	public void addSkill() {
 		skillDepartmentPlatformsCRUD("Customizations", "Skills", "add");
 	}
@@ -32,7 +40,7 @@ public class CustomizationsTest extends BaseTest {
 		skillDepartmentPlatformsCRUD("Customizations", "Skills", "delete");
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 1)
 	public void addDepartment() {
 		skillDepartmentPlatformsCRUD("Customizations", "Departments", "add");
 	}
@@ -47,7 +55,7 @@ public class CustomizationsTest extends BaseTest {
 		skillDepartmentPlatformsCRUD("Customizations", "Departments", "delete");
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 2)
 	public void addPlatforms() {
 		skillDepartmentPlatformsCRUD("Customizations", "Platforms", "add");
 	}
@@ -63,7 +71,7 @@ public class CustomizationsTest extends BaseTest {
 	}
 
 	public void skillDepartmentPlatformsCRUD(String menu, String subMenu, String operation) {
-		customizationsPage = new CustomizationsPage();
+
 		SideMenuPage.sideMenuClick(menu);
 		SideMenuPage.subMenu(subMenu);
 
@@ -72,39 +80,39 @@ public class CustomizationsTest extends BaseTest {
 			customizationsPage.addSkillDepartmentPlatformDesignationsTeam("");
 
 			if (subMenu.equals("Skills")) {
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.SKILL_ADD);
+				assertEquals(BasePage.getToastMessage(), AppConstant.SKILL_ADD);
 			} else if (subMenu.equals("Departments")) {
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.DEPARTMENT_ADD);
+				assertEquals(BasePage.getToastMessage(), AppConstant.DEPARTMENT_ADD);
 			} else if (subMenu.equals("Platforms")) {
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.PLATFORM_ADD);
+				assertEquals(BasePage.getToastMessage(), AppConstant.PLATFORM_ADD);
 			}
 		} else if (operation.equals("edit")) {
 
 			customizationsPage.editSkillDepartmentPlatform();
 
 			if (subMenu.equals("Skills")) {
-				assertEquals(SideMenuPage.getToastMessage().trim(), AppConstant.SKILL_UPDATE);
+				assertEquals(BasePage.getToastMessage().trim(), AppConstant.SKILL_UPDATE);
 			} else if (subMenu.equals("Departments")) {
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.DEPARTMENT_UPDATE);
+				assertEquals(BasePage.getToastMessage(), AppConstant.DEPARTMENT_UPDATE);
 			} else if (subMenu.equals("Platforms")) {
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.PLATFORM_UPDATE);
+				assertEquals(BasePage.getToastMessage(), AppConstant.PLATFORM_UPDATE);
 			}
 		} else if (operation.equals("delete")) {
 
 			customizationsPage.deleteSkillDepartmentPlatform();
 
 			if (subMenu.equals("Skills")) {
-				assertEquals(SideMenuPage.getToastMessage().trim(), AppConstant.SKILL_DELETE);
+				assertEquals(BasePage.getToastMessage().trim(), AppConstant.SKILL_DELETE);
 			} else if (subMenu.equals("Departments")) {
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.DEPARTMENT_DELETE);
+				assertEquals(BasePage.getToastMessage(), AppConstant.DEPARTMENT_DELETE);
 			} else if (subMenu.equals("Platforms")) {
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.PLATFORM_DELETE);
+				assertEquals(BasePage.getToastMessage(), AppConstant.PLATFORM_DELETE);
 			}
 		}
-		SideMenuPage.hiddenToastMessage();
+		BasePage.hiddenToastMessage();
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 3)
 	public void addTeams() {
 		designationsTeamsCRUD("Customizations", "Teams", "add");
 	}
@@ -119,7 +127,7 @@ public class CustomizationsTest extends BaseTest {
 		designationsTeamsCRUD("Customizations", "Teams", "delete");
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 4)
 	public void addDesignations() {
 		designationsTeamsCRUD("Customizations", "Designations", "add");
 	}
@@ -135,7 +143,7 @@ public class CustomizationsTest extends BaseTest {
 	}
 
 	public void designationsTeamsCRUD(String menu, String subMenu, String operation) {
-		customizationsPage = new CustomizationsPage();
+
 		SideMenuPage.sideMenuClick(menu);
 		SideMenuPage.subMenu(subMenu);
 
@@ -143,28 +151,28 @@ public class CustomizationsTest extends BaseTest {
 
 			if (subMenu.equals("Designations")) {
 				customizationsPage.addSkillDepartmentPlatformDesignationsTeam("General");
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.DESIGNATION_ADD);
+				assertEquals(BasePage.getToastMessage(), AppConstant.DESIGNATION_ADD);
 			} else if (subMenu.equals("Teams")) {
 				customizationsPage.addSkillDepartmentPlatformDesignationsTeam("CEO CEO");
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.TEAM_ADD);
+				assertEquals(BasePage.getToastMessage(), AppConstant.TEAM_ADD);
 			}
 		} else if (operation.equals("edit")) {
 
 			if (subMenu.equals("Designations")) {
 				customizationsPage.editDesignationsTeam("HR");
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.DESIGNATION_UPDATE);
+				assertEquals(BasePage.getToastMessage(), AppConstant.DESIGNATION_UPDATE);
 			} else if (subMenu.equals("Teams")) {
 				customizationsPage.editDesignationsTeam("CEO CEO");
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.TEAM_UPDATE);
+				assertEquals(BasePage.getToastMessage(), AppConstant.TEAM_UPDATE);
 			}
 		} else if (operation.equals("delete")) {
 			customizationsPage.deleteDesignationsTeam();
 			if (subMenu.equals("Designations")) {
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.DESIGNATION_DELETE);
+				assertEquals(BasePage.getToastMessage(), AppConstant.DESIGNATION_DELETE);
 			} else if (subMenu.equals("Teams")) {
-				assertEquals(SideMenuPage.getToastMessage(), AppConstant.TEAM_DELETE);
+				assertEquals(BasePage.getToastMessage(), AppConstant.TEAM_DELETE);
 			}
 		}
-		SideMenuPage.hiddenToastMessage();
+		BasePage.hiddenToastMessage();
 	}
 }

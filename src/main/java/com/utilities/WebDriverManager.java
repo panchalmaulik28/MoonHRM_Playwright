@@ -2,7 +2,6 @@ package com.utilities;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 import com.microsoft.playwright.Browser;

@@ -9,57 +9,49 @@ public class SideMenuPage extends WebDriverManager {
 	static Locator project = page.locator("//mat-nav-list[contains(@class,'mat-mdc-nav-list')][8]");
 	static Locator admin = page.locator("//mat-nav-list[contains(@class,'mat-mdc-nav-list')][15]");
 	static Locator subMenuList = page.locator("//div[@class='left_wrap']/div[2]/ul/li");
-	static Locator spinner = page.locator("//div[contains(@class,'tbl_spinner')]");
-	static Locator toastMessage = page.locator("//div[@id='toast-container']/div/div");
-
+	
 	public static void sideMenuClick(String sideMenuText) {
 		int count = sideMenuTextList.count();
-		for (int i = 0; i < count - 1; i++) {
-			if (sideMenuTextList.nth(i).textContent().trim().equals(sideMenuText)) {
-				if (sideMenuText.equals("Project Summary") || sideMenuText.equals("Project List") || sideMenuText.equals("Project Sprint")) {
-					project.scrollIntoViewIfNeeded();
-					project.first().click();
+		if (count > 0) {
+			for (int i = 0; i < count - 1; i++) {
+				if (sideMenuTextList.nth(i).textContent().trim().contains(sideMenuText)) {
+					if (sideMenuText.equals("Project Summary") || sideMenuText.contains("Project List")
+							|| sideMenuText.equals("Project Sprint")) {
+						project.scrollIntoViewIfNeeded();
+						project.first().click();
+						BasePage.spinnerDismiss();
+					}
+					if (sideMenuText.equals("Settings") || sideMenuText.contains("Customizations")
+							|| sideMenuText.equals("Role & Permissions")) {
+						admin.scrollIntoViewIfNeeded();
+						admin.last().click();
+						BasePage.spinnerDismiss();
+					}
+					sideMenuTextList.nth(i).click();
+					BasePage.spinnerDismiss();
+					break;
 				}
-				if (sideMenuText.equals("Settings") || sideMenuText.equals("Customizations") || sideMenuText.equals("Role & Permissions")) {
-					admin.scrollIntoViewIfNeeded();
-					admin.last().click();
-				}
-				sideMenuTextList.nth(i).click();
-				break;
 			}
+		} else {
+			sideMenuClick(sideMenuText);
 		}
-		SideMenuPage.spinnerDismiss();
+		BasePage.spinnerDismiss();
 	}
 
 	public static void subMenu(String subMenuValue) {
 		int count = subMenuList.count();
-		for (int i = 0; i < count - 1; i++) {
-			if (subMenuList.nth(i).textContent().trim().equals(subMenuValue)) {
-				subMenuList.nth(i).scrollIntoViewIfNeeded();
-				subMenuList.nth(i).click();
-				spinnerDismiss();
-				break;
+		if (count > 0) {
+			for (int i = 0; i < count - 1; i++) {
+				if (subMenuList.nth(i).textContent().trim().equals(subMenuValue)) {
+					subMenuList.nth(i).scrollIntoViewIfNeeded();
+					subMenuList.nth(i).click();
+					BasePage.spinnerDismiss();
+					break;
+				}
 			}
+		} else {
+			subMenu(subMenuValue);
 		}
-		SideMenuPage.spinnerDismiss();
-	}
-
-	public static void spinnerDismiss() {
-		if (spinner.isVisible()) {
-			spinnerDismiss();
-		}
-	}
-
-	public static String getToastMessage() {
-		if (!toastMessage.isVisible()) {
-			getToastMessage();
-		}
-		return toastMessage.textContent().trim();
-	}
-
-	public static void hiddenToastMessage() {
-		if (toastMessage.isVisible()) {
-			hiddenToastMessage();
-		}
+		BasePage.spinnerDismiss();
 	}
 }

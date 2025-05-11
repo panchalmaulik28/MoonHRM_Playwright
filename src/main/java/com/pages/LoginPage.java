@@ -5,23 +5,31 @@ import com.utilities.WebDriverManager;
 
 public class LoginPage extends WebDriverManager {
 
-	public Locator emailValidation = page.locator("//mat-error[@id='mat-mdc-error-0']");
-	public Locator passwordValidation = page.locator("//mat-error[@id='mat-mdc-error-1']");
+	Locator emailValidation = page.locator("//mat-error[@id='mat-mdc-error-0']");
+	Locator passwordValidation = page.locator("//mat-error[@id='mat-mdc-error-1']");
 	Locator loginEmailTxt = page.locator("//input[@name='email']");
 	Locator loginPasswordTxt = page.locator("//input[@name='password']");
 	Locator submitBtn = page.locator("//button[@id='login_click']");
-	Locator snackBar = page.locator("//simple-snack-bar[contains(@class,\"mat-mdc-simple-snack-bar\")]/div");
 
 	public void fillEmail(String email) {
 		loginEmailTxt.fill(email);
 	}
+
+	public String getEmailValidationText() {
+		return emailValidation.textContent().trim();
+	}
+	
+	public String getPasswordValidationText() {
+		return passwordValidation.textContent().trim();
+	}
+	
 
 	public void fillPassword(String password) {
 		loginPasswordTxt.fill(password);
 	}
 
 	public void loginWithValidCredentials(String email, String password) {
-		fillEmail(email); 
+		fillEmail(email);
 		fillPassword(password);
 		submitBtn.click();
 	}
@@ -30,15 +38,5 @@ public class LoginPage extends WebDriverManager {
 		loginEmailTxt.clear();
 		loginPasswordTxt.clear();
 		submitBtn.click();
-	}
-
-	public String snackBarVisible() {
-		return snackBar.textContent().trim();
-	}
-
-	public void snackBarInVisible() {
-		if (snackBar.isVisible()) {
-			snackBarInVisible();
-		}
 	}
 }
